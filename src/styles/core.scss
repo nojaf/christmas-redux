@@ -1,2 +1,16 @@
 @import 'base';
 @import 'vendor/normalize';
+
+.no-padding{
+	padding: 0;
+}
+
+.remove{
+	margin-left:15px;
+	font-size:20px;
+	color:lightcoral;
+
+	&:hover{
+		cursor:pointer;
+	}
+}

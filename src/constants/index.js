@@ -1,5 +1,7 @@
 import { createConstants } from '../utils';
 
 export default createConstants(
-  'COUNTER_INCREMENT'
+  'ADD_PERSON',
+  'GENERATE',
+  'DELETE_PERSON'
 );

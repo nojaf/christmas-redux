@@ -19,7 +19,7 @@ function makeDefaultConfig () {
       [`${config.get('dir_test')}/**/*.js`] : ['webpack']
     },
     reporters : ['spec'],
-    browsers : ['PhantomJS'],
+    browsers : [/*"Chrome"*/'PhantomJS'],
     webpack : {
       devtool : 'inline-source-map',
       resolve : webpackConfig.resolve,
@@ -44,7 +44,8 @@ function makeDefaultConfig () {
       require('karma-sinon-chai'),
       require('karma-coverage'),
       require('karma-phantomjs-launcher'),
-      require('karma-spec-reporter')
+      require('karma-spec-reporter'),
+      require('karma-chrome-launcher')
     ]
   };
 

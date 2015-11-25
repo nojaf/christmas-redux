@@ -1,8 +1,8 @@
 import { combineReducers }    from 'redux';
 import { routerStateReducer } from 'redux-router';
-import counter                from './counter';
+import people from "./people";
 
 export default combineReducers({
-  counter,
+  people,
   router: routerStateReducer
 });

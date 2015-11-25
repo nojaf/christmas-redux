@@ -11,14 +11,14 @@
     "__DEBUG_NW__" : false
   },
   "rules": {
-    "comma-dangle" : [1, "never"],
+    "comma-dangle" : [0, "never"],
     "func-names"   : 0,
     "key-spacing"  : 0,
-    "space-before-function-paren" : [2, "always"],
+    "space-before-function-paren" : [0, "always"],
     "no-else-return"   : 0,
     "no-multi-spaces"  : 0,
-    "quotes"           : [2, "single"],
-    "jsx-quotes"       : [2, "prefer-single"],
+    "quotes"           : [2, "double"],
+    "jsx-quotes"       : [2, "prefer-double"],
     "one-var"          : 0
   }
 }

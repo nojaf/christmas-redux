@@ -1,9 +1,9 @@
-import React          from 'react';
-import ReactDOM       from 'react-dom';
-import Root           from './containers/Root';
-import configureStore from './store/configureStore';
+import React          from "react";
+import ReactDOM       from "react-dom";
+import Root           from "./containers/Root";
+import configureStore from "./store/configureStore";
 
-const target = document.getElementById('root');
+const target = document.getElementById("root");
 const store  = configureStore(window.__INITIAL_STATE__, __DEBUG__);
 
 const node = (
