@@ -26,17 +26,19 @@ export class HomeView extends React.Component {
     e.preventDefault();
     const person = this.refs.person.value;
     if(person){
-      this.props.actions.addPerson(person);
+      this.props.addPerson(person);
       this.refs.person.value = "";
+      this.forceUpdate();
     }
   }
 
   removeItem(person){
-    this.props.actions.removePerson(this.props.people.persons.indexOf(person));
+    this.props.removePerson(this.props.persons.indexOf(person));
+      this.forceUpdate();
   }
 
   generate(){
-    this.props.actions.generate();
+    this.props.generate();
   }
 
   render () {
@@ -50,21 +52,20 @@ export class HomeView extends React.Component {
                 <input type="text" className="form-control"
                   ref="person"
                   autoFocus={true}
-                  value={this.props.people.newPerson}
                  placeholder="Nieuwe persoon" />
               </div>
                 <input type="submit" value="toevoegen" className="btn btn-primary" />
             </form>
           </div>
           <div className="col-sm-6 no-padding">
-            <PeopleOverview items={this.props.people.persons} itemClickHandler={this.removeItem.bind(this)} />
+            <PeopleOverview items={this.props.persons} itemClickHandler={this.removeItem.bind(this)} />
           </div>
         </div>
         <div className="row no-gutter">
           <button style={{"marginTop":"15px"}} onClick={this.generate.bind(this)} className="btn btn-primary btn-large">Genereer</button>
         </div>
         <div className="row no-gutter">
-          <ResultsOverview results={this.props.people.results} />
+          <ResultsOverview results={this.props.results} />
         </div>
       </div>
     );

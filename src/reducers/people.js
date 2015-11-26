@@ -3,17 +3,14 @@ import { ADD_PERSON, DELETE_PERSON, GENERATE} from "../constants";
 import objectAssign from "object-assign";
 
 function addPerson(initialState, payload) {
-	let allPersons = initialState.persons || [];
-	allPersons.push(payload.value);
 	return objectAssign({}, initialState, {
-		persons: allPersons,
+		persons: [...(initialState.persons || []), payload.value],
 		results:null
 	});
 }
 
 function deletePerson(initialState, payload){
-	initialState.persons.splice(payload.index,1);
-	const reducedPeople = initialState.persons;
+	const reducedPeople = [].concat(initialState.persons.slice(0,payload.index), initialState.persons.slice(payload.index+1));
 	return objectAssign({}, initialState, 
 		{persons:reducedPeople, results:null});
 }

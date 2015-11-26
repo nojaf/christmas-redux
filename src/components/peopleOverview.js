@@ -1,8 +1,8 @@
 import React from "react";
 
 const PeopleOverview = ({items, itemClickHandler}) => {
-const liItems = items.map((item) => {
-			return <li key={item + new Date()} className="list-group-item">
+const liItems = items.map((item, index) => {
+			return <li key={index} className="list-group-item">
 						<span>{item}</span> 
 						<i onClick={itemClickHandler.bind(this,item)} className="glyphicon glyphicon-remove remove"></i>
 					</li>
