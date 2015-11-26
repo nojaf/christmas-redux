@@ -6,7 +6,7 @@ import {
 from "../constants";
 
 export default {
-  addPerson: (value) => ({type:ADD_PERSON, payload:{"value":value}}),
+  addPerson: (value) => ({type:ADD_PERSON, payload:{value}}),
   generate: () => ({type:GENERATE}),
-  removePerson:(index) => ({type:DELETE_PERSON, payload:{"index":index}})
+  removePerson:(index) => ({type:DELETE_PERSON, payload:{index}})
 };

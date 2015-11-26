@@ -1,34 +1,22 @@
-import configureStore from "../../src/store/configureStore";
 import actions from "actions/people";
+import {ADD_PERSON, DELETE_PERSON, GENERATE} from "constants";
 
 describe("invoking actions", () => {
-	it("should add a newPerson", () => {
-		const initialState = {people:{persons:[]}, router:null};
-		Object.freeze(initialState);
-		const store = configureStore(initialState, false);
-
-		store.dispatch(actions.addPerson("Hank"));
-		const state = store.getState(); 
-		expect(state.people.persons[0]).to.equal("Hank");
+	it("should return a ADD_PERSON with value", () => {
+		const action = actions.addPerson("Hank");
+		expect(action.type).to.equal(ADD_PERSON);
+		expect(action.payload.value).to.equal("Hank");
 	})
 
-	it("should remove a person", () => {
-		const initialState = {people:{persons:["Hank","James","Paul"]}};
-		Object.freeze(initialState);
-		const store = configureStore(initialState, false);
-
-		store.dispatch(actions.removePerson(0));
-		const state = store.getState();
-		expect(state.people.persons.length).to.equal(2);		
+	it("should return DELETE_PERSON with index", () => {
+		const action = actions.removePerson(0);
+		expect(action.type).to.equal(DELETE_PERSON);
+		expect(action.payload.index).to.equal(0);
 	});
 
-	it("should generate a result", () => {
-		const initialState = {"people":{"persons":["Hank","James"]}};
-		Object.freeze(initialState);
-		const store = configureStore(initialState, false);
-		
-		store.dispatch(actions.generate());
-		const state = store.getState();
-		assert.isNotNull(state.people.results);
+	it("should return GENERATE without payload", () => {
+		const action = actions.generate();
+		expect(action.type).to.equal(GENERATE);
+		expect(action.payload).to.undefined;
 	});
 });

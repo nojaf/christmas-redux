@@ -5,7 +5,6 @@ import objectAssign from "object-assign";
 function addPerson(initialState, payload) {
 	if(initialState.persons && initialState.persons.indexOf(payload.value) !== -1) return initialState;
 
-
 	return objectAssign({}, initialState, {
 		persons: [...(initialState.persons || []), payload.value],
 		results:null

@@ -1,7 +1,7 @@
 import {default as peopleReducer} from "reducers/people";
 import {ADD_PERSON, DELETE_PERSON, GENERATE} from "constants";
 
-describe("Reducers", () => {
+describe("people reducers", () => {
 	it("should return the previous state", () => {
 		const state = {};
 		Object.freeze(state);
