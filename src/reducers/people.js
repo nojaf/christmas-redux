@@ -1,25 +1,31 @@
 import { createReducer } from '../utils';
 import { ADD_PERSON, DELETE_PERSON, GENERATE} from "../constants";
-import objectAssign from "object-assign";
 
 function addPerson(initialState, payload) {
 	if(initialState.persons && initialState.persons.indexOf(payload.value) !== -1) return initialState;
 
-	return objectAssign({}, initialState, {
+	return {
+		...initialState, 
 		persons: [...(initialState.persons || []), payload.value],
 		results:null
-	});
+	};
 }
 
 function deletePerson(initialState, payload){
-	const reducedPeople = [].concat(initialState.persons.slice(0,payload.index), initialState.persons.slice(payload.index+1));
-	return objectAssign({}, initialState, 
-		{persons:reducedPeople, results:null});
+	const persons = [].concat(initialState.persons.slice(0,payload.index), initialState.persons.slice(payload.index+1));
+	return {
+			...initialState,
+			persons,
+			results:null
+		};
 }
 
 function generateResult(initialState, payload){
-	const result = determineOrder(initialState.persons);
-	return objectAssign({}, initialState, {"results":result});
+	const results = determineOrder(initialState.persons);
+	return {
+		...initialState,
+		results
+	}
 }
 
 function determineOrder(persons){
