@@ -1,7 +1,28 @@
 {
 	"routes":{},
 	"people":{
-		"persons":["Florian", "Lieselot", "Eline","Lander","Jonas"],
-		"results": new Map(),
+		"persons":[
+			{
+				"name":"Florian",
+				"id":1
+			},
+			{
+				"name":"Lieselot",
+				"id":2
+			},
+			{
+				"name":"Eline",
+				"id":3
+			},
+			{
+				"name":"Lander",
+				"id":4
+			},
+			{
+				"name":"Jonas",
+				"id":5
+			}
+		],
+		"results": new Map([[1,2],[2,3],[3,4],[4,5],[5,1]]),
 	}
 }

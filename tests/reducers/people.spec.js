@@ -19,11 +19,32 @@ describe("people reducers", () => {
 			Object.freeze(state);
 
 			const newState = peopleReducer(state, {type:ADD_PERSON, payload:{"value":"Jimmy"}});
-			assert.equal("Jimmy",newState.persons[0]);
+			assert.deepEqual({name:"Jimmy",id:1}, newState.persons[0]);
 		});
 
+		it("should not add an existing name", () => {
+			const state = {
+				persons:[
+					{
+						name:"Jimmy",
+						id:1
+					}
+				]
+			};
+			Object.freeze(state);
+
+			const newState = peopleReducer(state, {type:ADD_PERSON, payload:{"value":"Jimmy"}});
+			assert.equal(state, newState);			
+		})
+
 		it("should clear the results when adding a person", () => {
-			const state = {persons:["Tim","Peter"], results:new Map()};
+			const state = {
+				persons:[
+					{name:"Tim", id:1},
+					{name:"Peter", id:2}
+				], 
+				results:new Map()
+			};
 			Object.freeze(state);
 
 			const newState = peopleReducer(state, {type:ADD_PERSON, payload:{"value":"Gilles"}});

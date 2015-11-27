@@ -2,13 +2,29 @@ import { createReducer } from '../utils';
 import { ADD_PERSON, DELETE_PERSON, GENERATE} from "../constants";
 
 function addPerson(initialState, payload) {
-	if(initialState.persons && initialState.persons.indexOf(payload.value) !== -1) return initialState;
+	if(nameAlreadyExists(initialState.persons || [],payload.value)) {
+		return initialState;
+	}
+
+	const newPerson = {
+		name:payload.value,
+		id:nextId(initialState.persons || [])
+	}
 
 	return {
 		...initialState, 
-		persons: [...(initialState.persons || []), payload.value],
+		persons: [...(initialState.persons || []), newPerson],
 		results:null
 	};
+}
+
+function nameAlreadyExists(persons, name){
+	return persons.some(p => p.name === name);
+}
+
+function nextId(persons){
+	const ids = persons.map(p => p.id);
+	return (ids.length !== 0 ? Math.max(...ids) + 1 : 1);
 }
 
 function deletePerson(initialState, payload){
