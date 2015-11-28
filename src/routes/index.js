@@ -6,5 +6,6 @@ import HomeView              from 'views/HomeView';
 export default (
   <Route path='/' component={CoreLayout}>
     <IndexRoute component={HomeView} />
+    <Route path='/christmas-redux' component={HomeView} />
   </Route>
 );
