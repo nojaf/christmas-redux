@@ -54,15 +54,15 @@ describe("people reducers", () => {
 
 	describe("passed a DELETE_PERSON type", () => {
 		it("should remove a person", () => {
-			const state = {persons:["Tim", "Bob", "James"]};
+			const state = {persons:[{},{name:"Bob",index:2},{}]};
 			Object.freeze(state);
 
 			const newState = peopleReducer(state, {type:DELETE_PERSON, payload:{"index":2}});
-			assert.equal("Bob", newState.persons[newState.persons.length - 1]);
+			assert.deepEqual({name:"Bob",index:2}, newState.persons[newState.persons.length - 1]);
 		});
 
 		it("should clear the results when removing a person", () => {
-			const state = {persons:["Tim", "Dave", "Mike"], results:new Map()};
+			const state = {persons:[{},{},{}], results:new Map()};
 			Object.freeze(state);
 
 			const newState = peopleReducer(state, {type:DELETE_PERSON, payload:{"index":0}});
@@ -72,7 +72,12 @@ describe("people reducers", () => {
 
 	describe("passed a GENERATE type", () => {
 		it("should generate a resultset", () => {
-			const state = {persons:["Dave", "Hanna"]};
+			const state = {
+				persons:[
+					{id:1, name:"Dave"},
+					{id:2, name: "Hanna"}
+				]
+			};
 			Object.freeze(state);
 
 			const newState = peopleReducer(state, {type:GENERATE});
@@ -80,12 +85,26 @@ describe("people reducers", () => {
 		});
 
 		it("should generate a matching circle", () => {
-			const state = {persons:["Dave", "Hanna","Henry"]};
+			const state = {
+				persons:[
+				{
+					name:"Dave",
+					id:1
+				},
+				{
+				 	name:"Hanna",
+				 	id:2
+				},
+				{
+					name:"Henry",
+					id:3
+				}]
+			};
 			Object.freeze(state);
 
 			const newState = peopleReducer(state, {type:GENERATE});
 			newState.results.forEach((key,value) => {
-				assert.notEqual(key, newState.results[key]);
+				assert.notDeepEqual(key, newState.results[key]);
 			});
 		});
 

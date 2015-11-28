@@ -50,9 +50,9 @@ function determineOrder(persons){
 
 	for (var i = randomPersonArray.length - 1; i > -1; i--) {
 		if(i > 0){
-		 	resultMap.set(randomPersonArray[i], randomPersonArray[i -1]);
+		 	resultMap.set(randomPersonArray[i].id, randomPersonArray[i -1].id);
 		}else{
-			resultMap.set(randomPersonArray[0], randomPersonArray[randomPersonArray.length -1]);
+			resultMap.set(randomPersonArray[0].id, randomPersonArray[randomPersonArray.length -1].id);
 		}
 	};
 

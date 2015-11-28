@@ -4,13 +4,13 @@ function renderEmptyItem(){
 	return <p></p>;
 }
 
-function renderResultTable(results){
+function renderResultTable(results, persons){
 	let rows = [];
 	results.forEach((key, value) => {
 		rows.push(<tr key={key}>
-					<td>{key}</td>
+					<td>{getNameFromId(key,persons)}</td>
 					<td>koopt voor</td>
-					<td>{value}</td>
+					<td>{getNameFromId(value, persons)}</td>
 				</tr>)
 	});
 
@@ -26,11 +26,15 @@ function renderResultTable(results){
 		</table>)
 }
 
+function getNameFromId(id, persons){
+	return persons.find(p => p.id === id).name;
+}
+
 // destructure thing
 // (props) => { } -> 
 // (let results = props.results) - ish
-const ResultsOverview = ({results}) => {
-	return (results ? renderResultTable(results) : renderEmptyItem());
+const ResultsOverview = ({results, persons}) => {
+	return (results ? renderResultTable(results, persons) : renderEmptyItem());
 };
 
 export default ResultsOverview;

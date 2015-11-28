@@ -28,13 +28,11 @@ export class HomeView extends React.Component {
     if(person){
       this.props.addPerson(person);
       this.refs.person.value = "";
-      this.forceUpdate();
     }
   }
 
-  removeItem(person){
-    this.props.removePerson(this.props.persons.indexOf(person));
-      this.forceUpdate();
+  removeItem(index){
+    this.props.removePerson(index);
   }
 
   generate(){
@@ -65,7 +63,7 @@ export class HomeView extends React.Component {
           <button style={{"marginTop":"15px"}} onClick={this.generate.bind(this)} className="btn btn-primary btn-large">Genereer</button>
         </div>
         <div className="row no-gutter">
-          <ResultsOverview results={this.props.results} />
+          <ResultsOverview results={this.props.results} persons={this.props.persons} />
         </div>
       </div>
     );
