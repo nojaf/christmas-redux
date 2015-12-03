@@ -5,6 +5,7 @@ function renderEmptyItem(){
 }
 
 function renderResultTable(results, persons){
+	console.log(results, persons);
 	let rows = [];
 	results.forEach((key, value) => {
 		rows.push(<tr key={key}>
@@ -34,7 +35,7 @@ function getNameFromId(id, persons){
 // (props) => { } -> 
 // (let results = props.results) - ish
 const ResultsOverview = ({results, persons}) => {
-	return (results ? renderResultTable(results, persons) : renderEmptyItem());
+	return (results.length > 0 ? renderResultTable(results, persons) : renderEmptyItem());
 };
 
 export default ResultsOverview;
