@@ -1,7 +1,6 @@
 import React from "react";
 
 const PeopleOverview = ({items, itemClickHandler}) => {
-	console.log(items);
 const liItems = items.map((item,index) => {
 			return <li key={item.id} className="list-group-item">
 						<span>{item.name}</span> 
