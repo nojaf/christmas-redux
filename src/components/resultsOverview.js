@@ -5,15 +5,14 @@ function renderEmptyItem(){
 }
 
 function renderResultTable(results, persons){
-	console.log(results, persons);
-	let rows = [];
-	results.forEach((key, value) => {
-		rows.push(<tr key={key}>
-					<td>{getNameFromId(key,persons)}</td>
-					<td>koopt voor</td>
-					<td>{getNameFromId(value, persons)}</td>
-				</tr>)
-	});
+	const keys = Object.keys(results);
+	const rows = keys.map(key => {
+		return (<tr key={key}>
+			<td>{getNameFromId(key,persons)}</td>
+			<td>koopt voor</td>
+			<td>{getNameFromId(results[key], persons)}</td>
+		</tr>)
+	})
 
 	return (<table className="table table-striped">
 			<thead>
@@ -28,14 +27,14 @@ function renderResultTable(results, persons){
 }
 
 function getNameFromId(id, persons){
-	return persons.find(p => p.id === id).name;
+	return persons.find(p => p.id === parseInt(id)).name;
 }
 
 // destructure thing
 // (props) => { } -> 
 // (let results = props.results) - ish
 const ResultsOverview = ({results, persons}) => {
-	return (results.length > 0 ? renderResultTable(results, persons) : renderEmptyItem());
+	return (Object.keys(results).length > 0 ? renderResultTable(results, persons) : renderEmptyItem());
 };
 
 export default ResultsOverview;
