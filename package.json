@@ -15,7 +15,10 @@
     "test": "node ./node_modules/karma/bin/karma start",
     "test:dev": "npm run test -- --watch",
     "deploy": "npm run lint && npm run test && npm run compile",
-    "test:chrome": "node ./node_modules/karma/bin/karma start --browsers Chrome --debug --watch"
+    "test:chrome": "node ./node_modules/karma/bin/karma start --browsers Chrome --debug --watch",
+    "pregh-pages":"npm run clean && webpack",
+    "gh-pages":"del app.* && del vendor.* && xcopy \"./dist\" . /y",
+    "postgh-pages":"node ./publish/update-index.js"
   },
   "repository": {
     "type": "git",

@@ -1677,7 +1677,8 @@ webpackJsonp([1],[
 	exports['default'] = _react2['default'].createElement(
 	  _reactRouter.Route,
 	  { path: '/', component: _layoutsCoreLayout2['default'] },
-	  _react2['default'].createElement(_reactRouter.IndexRoute, { component: _viewsHomeView2['default'] })
+	  _react2['default'].createElement(_reactRouter.IndexRoute, { component: _viewsHomeView2['default'] }),
+	  _react2['default'].createElement(_reactRouter.Route, { path: '/christmas-redux', component: _viewsHomeView2['default'] })
 	);
 	module.exports = exports['default'];
 
@@ -11539,4 +11540,4 @@ webpackJsonp([1],[
 
 /***/ }
 ]);
-//# sourceMappingURL=app.883ad50b390287785b1c.js.map
+//# sourceMappingURL=app.e5297a053775bcb67960.js.map
