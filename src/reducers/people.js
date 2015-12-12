@@ -1,58 +1,50 @@
 import { createReducer } from '../utils';
 import { ADD_PERSON, DELETE_PERSON, GENERATE} from "../constants";
+import Immutable from "immutable";
 
 function addPerson(initialState, payload) {
-	if(nameAlreadyExists(initialState.persons || [],payload.value)) {
+	if(nameAlreadyExists(initialState.get("persons"), payload.value)) {
 		return initialState;
 	}
 
 	const newPerson = {
 		name:payload.value,
-		id:nextId(initialState.persons || [])
+		id:nextId(initialState.get("persons"))
 	}
 
-	return {
-		...initialState, 
-		persons: [...(initialState.persons || []), newPerson],
-		results:null
-	};
+	return initialState
+			.set("persons", initialState.get("persons").push(newPerson))
+			.set("results", Immutable.Map());
 }
 
-function nameAlreadyExists(persons, name){
+function nameAlreadyExists(persons = Immutable.List(), name){
 	return persons.some(p => p.name === name);
 }
 
-function nextId(persons){
+function nextId(persons = Immutable.List()){
 	const ids = persons.map(p => p.id);
-	return (ids.length !== 0 ? Math.max(...ids) + 1 : 1);
+	return (ids.size !== 0 ? Math.max(...ids) + 1 : 1);
 }
 
 function deletePerson(initialState, payload){
-	const persons = [].concat(initialState.persons.slice(0,payload.index), initialState.persons.slice(payload.index+1));
-	return {
-			...initialState,
-			persons,
-			results:null
-		};
+	return initialState
+			.set("persons", initialState.get("persons").filter(p => p.index !== payload.index))
+			.set("results", Immutable.Map());
 }
 
 function generateResult(initialState, payload){
-	const results = determineOrder(initialState.persons);
-	return {
-		...initialState,
-		results
-	}
+	return initialState
+			.set("results", determineOrder(initialState.get("persons")));
 }
 
 function determineOrder(persons){
-	const resultMap = new Map();
-	const randomPersonArray = shuffle(persons.slice());
-
+	let resultMap = new Immutable.Map();
+	const randomPersonArray = shuffle(persons.toArray());
 	for (var i = randomPersonArray.length - 1; i > -1; i--) {
 		if(i > 0){
-		 	resultMap.set(randomPersonArray[i].id, randomPersonArray[i -1].id);
+		 	resultMap = resultMap.set(randomPersonArray[i].id, randomPersonArray[i -1].id);
 		}else{
-			resultMap.set(randomPersonArray[0].id, randomPersonArray[randomPersonArray.length -1].id);
+			resultMap = resultMap.set(randomPersonArray[0].id, randomPersonArray[randomPersonArray.length -1].id);
 		}
 	};
 
@@ -78,9 +70,14 @@ function shuffle(array) {
   return array;
 }
 
-const initialState = {
-	persons:[]
-};
+export function initialStateProvider(){
+	return Immutable.Map({
+		"persons":Immutable.List(),
+		"results":Immutable.Map()
+	});
+}
+
+const initialState = initialStateProvider();
 export default createReducer(initialState, {
 	[ADD_PERSON]: (state, payload) => addPerson(state, payload), 
 	[DELETE_PERSON]: (state, payload) => deletePerson(state, payload),

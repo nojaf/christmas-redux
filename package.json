@@ -4,7 +4,7 @@
   "description": "Get started with React, Redux, and React-Router!",
   "main": "index.js",
   "scripts": {
-    "clean": "rm -rf dist",
+    "clean": "cd dist && del *.* /Q",
     "lint": "eslint ./src/**/*.js",
     "lint:tests": "eslint ./tests/**/*.spec.js",
     "compile": "webpack",
@@ -28,6 +28,7 @@
     "chalk": "^1.1.1",
     "dotenv": "^1.2.0",
     "history": "^1.9.0",
+    "immutable": "^3.7.5",
     "react": "^0.14.0",
     "react-dom": "^0.14.0",
     "react-redux": "^4.0.0",

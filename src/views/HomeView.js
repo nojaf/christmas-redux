@@ -11,7 +11,7 @@ import ResultsOverview        from "components/resultsOverview";
 // the component can be tested w/ and w/o being connected.
 // See: http://rackt.github.io/redux/docs/recipes/WritingTests.html
 const mapStateToProps = (state, ownProps) => {
-  return state.people;
+  return state.people.toJS();
 };
 const mapDispatchToProps = (dispatch, ownProps) => {
   return bindActionCreators(peopleActions, dispatch);
