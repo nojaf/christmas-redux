@@ -28,7 +28,6 @@ export default class Root extends React.Component {
 
   render () {
     return (
-      <div>
         <Provider store={this.props.store}>
           <div>
             <ReduxRouter>
@@ -37,7 +36,6 @@ export default class Root extends React.Component {
             {this.renderDevTools()}
           </div>
         </Provider>
-      </div>
     );
   }
 }
